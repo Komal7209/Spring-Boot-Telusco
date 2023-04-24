@@ -9,7 +9,7 @@ public class DemoApplication {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context =  SpringApplication.run(DemoApplication.class, args);
-		Alien a = context.getBean(Alien.class);
+		Alien a = context.getBean(Alien.class); // getBean refers to getting object of Alien class
 		a.show();
 
 	}
