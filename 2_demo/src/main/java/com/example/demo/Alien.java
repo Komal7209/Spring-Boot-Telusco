@@ -28,10 +28,11 @@ public class Alien {
 	private int aid;
 	private String aname;
 	private String tech;
-	@Autowired
-	@Qualifier("lap1")
-	private Laptop laptop;
-
+	//10.  @Autowired will search by type
+	@Autowired // this is required , because we are not creating object below using context or not going ahead with getBeans
+	@Qualifier("lap1") //11.  this helps to search by name , thus it will search for @Component(lap1)
+	private Laptop laptop; //9.  As ALien class is dependent on laptop class, so we require object of laptop class
+ 
 	
 	
 	public Alien() {
@@ -60,6 +61,8 @@ public class Alien {
 	public void setTech(String tech) {
 		this.tech = tech;
 	}
+
+	// getter and setter for laptop
 	public Laptop getLaptop() {
 		return laptop;
 	}
@@ -72,7 +75,7 @@ public class Alien {
 	public void show() 
 	{
 		System.out.println("in show");
-		laptop.compile();
+		laptop.compile(); // due to object of laptop we are here calling laptop class's method and it got instantiated because @Component annotation
 	}
 }
 

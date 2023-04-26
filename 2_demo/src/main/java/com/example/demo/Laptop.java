@@ -2,11 +2,14 @@ package com.example.demo;
 
 import org.springframework.stereotype.Component;
 
-@Component("lap1")
+@Component("lap1") // because of this only it got instantiated
 public class Laptop
 {
+	// properties
 	private int lid;
 	private String brand;
+
+	// getters and setter for those properties
 	public int getLid() {
 		return lid;
 	}
@@ -19,6 +22,8 @@ public class Laptop
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
+
+	//9. source > toString()
 	@Override
 	public String toString() {
 		return "Laptop [lid=" + lid + ", brand=" + brand + "]";
@@ -28,3 +33,5 @@ public class Laptop
 		System.out.println("compiling");
 	}
 }
+
+
