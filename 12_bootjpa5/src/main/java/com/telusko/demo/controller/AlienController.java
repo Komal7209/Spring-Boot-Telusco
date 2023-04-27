@@ -1,6 +1,10 @@
 package com.telusko.demo.controller;
 
 import org.springframework.stereotype.Controller;
+
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,14 +21,13 @@ public class AlienController
 	@Autowired
 	AlienRepo repo;
 
-	// home page
 	@RequestMapping("/")
 	public String home()
 	{
 		return "home.jsp";
 	}
 
-	// for adding data
+
 	@RequestMapping("/addAlien")
 	public String addAlien(Alien alien)
 	{
@@ -32,22 +35,22 @@ public class AlienController
 		return "home.jsp";
 	}
 
-	// for fetching data
-	@RequestMapping("/aliens")
-	@ResponseBody // 2. because of this it becomes data to be send
-	public String getAliens()
+// because of this line produces= {"application/xml"} => it will restrict to just xml data
+	@RequestMapping(path="/aliens",produces= {"application/xml"})
+	@ResponseBody
+	public List<Alien> getAliens()
 	{
-		return repo.findAll().toString(); //1.  this will give all the aliens // till findAll, it returned an iterator, so required to write toString
-											// 1.2 And this is just a view name
-				
+		return repo.findAll();
+		
+		
 	}
 
-	// for fetching data by aid
-	@RequestMapping("/alien/{aid}") // 3. putting wildcard i.e {}
+
+	@RequestMapping("/alien/{aid}")
 	@ResponseBody
-	public String getAlien(@PathVariable("aid")int aid) //3.1  using @PathVariable for fetching from browser aid
+	public Optional<Alien> getAlien(@PathVariable("aid")int aid)
 	{
-		return repo.findById(aid).toString();
+		return repo.findById(aid);
 		
 		
 	}
